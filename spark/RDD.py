@@ -1,6 +1,8 @@
 from pyspark import SparkConf, SparkContext
 
-if _name_ == '_main_':
+# RDD 两大算子
+
+if __name__ == '__main__':
     conf = SparkConf().setMaster("local[2]").setAppName("Map")
     sc = SparkContext(conf=conf)
 
@@ -58,6 +60,15 @@ if _name_ == '_main_':
         b = sc.parallelize([3,4,5])
         print(a.union(b).distinct().collect())
 
+    def my_action():
+        rdd = sc.parallelize([1,2,3,4,5,6,7])
+        print(rdd.collect())
+        print(rdd.min())
+        print(rdd.max())
+        print(rdd.take(3))
+        print(rdd.sum())
+        print(rdd.reduce(lambda x,y:x+y))
+
     my_map()
     my_map2()
     my_filter()
@@ -67,7 +78,7 @@ if _name_ == '_main_':
     my_sort()
     my_union()
     my_distinct()
-
+    my_action()
 
 
     sc.stop()
